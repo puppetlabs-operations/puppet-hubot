@@ -1,0 +1,7 @@
+# IRC Environment Variables
+export HUBOT_IRC_NICK='<%=   scope.lookupvar('::hubot::adapter::irc::irc_nickname') %>'
+export HUBOT_IRC_ROOMS='<%=  scope.lookupvar('::hubot::adapter::irc::irc_rooms').join(",") %>'
+export HUBOT_IRC_SERVER='<%= scope.lookupvar('::hubot::adapter::irc::irc_server') %>'
+<% if (irc_password = scope.lookupvar('::hubot::adapter::irc::irc_password')) -%>
+export HUBOT_IRC_SERVER='<%= irc_password %>'
+<% end -%>

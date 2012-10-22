@@ -21,19 +21,9 @@ HUBOT_BIN='/bin/hubot'
 HUBOT_USER='<%= daemon_user %>'
 HUBOT_ADAPTER='<%= adapter %>'
 
-<% if adapter == 'irc' -%> 
-# IRC Environment Variables
-export HUBOT_IRC_NICK='<%= irc_nickname %>'
-export HUBOT_IRC_ROOMS='<%= irc_rooms.join(",") %>'
-export HUBOT_IRC_SERVER='<%= irc_server %>'
+<%= scope.function_template("hubot/adapter/#{@adapter}.erb") %>
 export HUBOT_OPTS="-a $HUBOT_ADAPTER"
-<% elsif adapter == 'campfire' -%> 
-# Campfire Environment Variables
-export HUBOT_CAMPFIRE_ACCOUNT='<%= campfire_account %>'
-export HUBOT_CAMPFIRE_ROOMS='<%= campfire_rooms.join(",") %>'
-export HUBOT_CAMPFIRE_TOKEN='<%= campfire_token %>'
-export HUBOT_OPTS="-a $HUBOT_ADAPTER"
-<% end -%>
+
 <% if @environment -%>
 <% environment.each do |var| -%>
 export <%= var %>

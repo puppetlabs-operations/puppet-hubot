@@ -1,0 +1,4 @@
+# Campfire Environment Variables
+export HUBOT_CAMPFIRE_ACCOUNT='<%= scope.lookupvar('::hubot::adapter::campfire::campfire_account') %>'
+export HUBOT_CAMPFIRE_ROOMS='<%=   scope.lookupvar('::hubot::adapter::campfire::campfire_rooms').join(",") %>'
+export HUBOT_CAMPFIRE_TOKEN='<%=   scope.lookupvar('::hubot::adapter::campfire::campfire_token') %>'

@@ -1,35 +1,15 @@
 class hubot::config (
   $adapter,
+  $adapter_config,
   $install_dir,
   $daemon_user,
   $daemon_pass = undef,
-  $irc_nickname = undef,
-  $irc_password = undef,
-  $irc_server = undef,
-  $irc_rooms = undef,
-  $campfire_account = undef,
-  $campfire_rooms = undef,
-  $campfire_token = undef,
   $vagrant_hubot,
   $environment = undef
 ) inherits hubot::params {
 
-  # Sanity check config
-  case $adapter {
-    irc: {
-        if (!defined($irc_nickname)) and ($irc_rooms[0] == '') and (!defined($irc_server)) {
-            fail("Required Options missing: $adapter requires options: irc_nickname, irc_server, irc_rooms")
-	}
-    }
-    campfire: {
-        if (!defined($campfire_account)) and ($campfire_rooms[0] == '') and (!defined($campfire_token)) {
-            fail("Required Options missing: $adapter requires options: campfire_account, campfire_rooms, campfire_token")
-	}
-    }
-    default:  {
-      fail("Unsupported Adapter: ${adapter}. Supported Adpaters: irc|campfire")
-    }
-  }
+  # I'm so sorry.
+  create_resources('class', { "hubot::adapter::${adapter}" => $adapter_config })
 
   File {
     owner => 'root',
