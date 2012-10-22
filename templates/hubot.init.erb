@@ -21,7 +21,7 @@ HUBOT_BIN='/bin/hubot'
 HUBOT_USER='<%= daemon_user %>'
 HUBOT_ADAPTER='<%= adapter %>'
 
-<%= scope.function_template("hubot/adapter/#{@adapter}.erb") %>
+<%= scope.function_template(["hubot/adapter/#{@adapter}.erb"]) %>
 export HUBOT_OPTS="-a $HUBOT_ADAPTER"
 
 <% if @environment -%>
