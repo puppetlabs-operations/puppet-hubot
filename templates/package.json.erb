@@ -15,7 +15,7 @@
   },
 
   "dependencies": {
-<% if (dep = scope.lookupvar("::hubot::adapter::#{@adapter}::dependency")) -%>
+<% if (dep = scope.lookupvar("::hubot::adapter::#{adapter}::dependency")) -%>
     <%= dep %>,
 <% end -%>
     "hubot": "2.3.2",
