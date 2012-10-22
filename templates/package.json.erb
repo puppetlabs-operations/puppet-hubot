@@ -15,9 +15,9 @@
   },
 
   "dependencies": {
-    <% if (dep = scope.lookupvar("::hubot::adapter::#{@adapter}::dependency")) -%>
+<% if (dep = scope.lookupvar("::hubot::adapter::#{@adapter}::dependency")) -%>
     <%= dep %>,
-    <% end -%>
+<% end -%>
     "hubot": "2.3.2",
     "coffee-script": "1.3.3",
     "optparse": "1.0.3",
