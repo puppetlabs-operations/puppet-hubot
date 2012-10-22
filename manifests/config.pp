@@ -10,6 +10,7 @@ class hubot::config (
 
   # I'm so sorry.
   create_resources('class', { "hubot::adapter::${adapter}" => $adapter_config })
+  include "hubot::adapter::${adapter}"
 
   File {
     owner => 'root',
