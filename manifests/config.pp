@@ -28,6 +28,12 @@ class hubot::config (
     content => template('hubot/hubot.init.erb')
   }
 
+  file { '/etc/default/hubot':
+    ensure  => file,
+    mode    => '0755',
+    content => template("hubot/adapter/${adapter}.erb"),
+  }
+
   # User Account for Hubot
   user { $daemon_user:
     ensure     => present,
