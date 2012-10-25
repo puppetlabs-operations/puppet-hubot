@@ -3,6 +3,7 @@ class hubot (
   $adapter_config   = {},
   $install_dir      = $hubot::params::options['install_dir'],
   $git_source       = $hubot::params::options['git_source'],
+  $git_branch       = $hubot::params::options['git_branch'],
   $daemon_user      = $hubot::params::options['daemon_user'],
   $daemon_pass      = undef,
   $vagrant_hubot    = false,
@@ -14,6 +15,7 @@ class hubot (
   -> class { 'hubot::package':
     install_dir => $install_dir,
     git_source  => $git_source,
+    git_branch  => $git_branch,
   }
   -> class { 'hubot::config':
     adapter          => $adapter,

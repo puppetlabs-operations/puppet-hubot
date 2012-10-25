@@ -14,6 +14,7 @@ class hubot::params {
     daemon_user => 'hubot',
     adapter     => 'irc',
     git_source  => 'git://github.com/github/hubot.git',
+    git_branch  => 'master',
   }
   
   # Default Settings for IRC

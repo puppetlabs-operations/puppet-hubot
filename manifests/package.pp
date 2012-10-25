@@ -1,6 +1,7 @@
 class hubot::package (
   $install_dir,
-  $git_source
+  $git_source,
+  $git_branch,
 ) inherits hubot::params {
   Exec {
     path => '/bin:/sbin:/usr/bin:/usr/sbin',
@@ -18,8 +19,10 @@ class hubot::package (
     require  => Class['ruby::dev'],
   }
   exec { 'download hubot via git':
-    command => "git clone ${git_source} ${install_dir}",
+    command => "git clone ${git_source} ${install_dir} -b ${git_branch}",
     creates => $install_dir,
-    notify  => Class['hubot::config'],
+    user    => $hubot::daemon_user,
+    group   => $hubot::daemon_user,
+    notify   => Class['hubot::config'],
   }
 }
