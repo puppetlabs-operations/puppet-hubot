@@ -27,6 +27,7 @@ class hubot (
     environment      => $environment,
   }
   -> class { 'hubot::scriptconfig':
+    adapter           => $adapter,
     install_dir       => $install_dir,
     managescripts     => $managescripts,
     scriptdir_symlink => $scriptdir_symlink,

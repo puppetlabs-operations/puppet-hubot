@@ -1,4 +1,5 @@
 class hubot::scriptconfig(
+  $adapter,
   $install_dir,
   $managescripts     = true,
   $managedeps        = true,
