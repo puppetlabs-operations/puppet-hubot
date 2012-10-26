@@ -8,11 +8,14 @@ class hubot::scriptconfig(
 
   $scriptdir = "${install_dir}/scripts"
 
+  File {
+    owner => 0,
+    group => 0,
+    mode  => '0755',
+  }
+
   file { '/usr/local/sbin/rebuild-hubot-scripts.rb':
     ensure  => present,
-    mode    => '0755',
-    owner   => 0,
-    group   => 0,
     content => template('hubot/rebuild-hubot-scripts.rb.erb'),
   }
 
@@ -36,7 +39,6 @@ class hubot::scriptconfig(
     file { "${install_dir}/package.json":
       ensure  => file,
       content => template('hubot/package.json.erb'),
-      notify  => Class['hubot::package'],
     }
   }
 }
