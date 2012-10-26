@@ -13,7 +13,7 @@ class hubot (
 ) inherits hubot::params {
   include stdlib
 
-  anchor { 'hutbot::begin': }
+  anchor { 'hubot::begin': }
   -> class { 'hubot::package':
     install_dir => $install_dir,
     git_source  => $git_source,
