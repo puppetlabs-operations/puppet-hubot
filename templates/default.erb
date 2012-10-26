@@ -7,4 +7,6 @@ export <%= var %>
 
 HUBOT_DIR="<%= install_dir %>"
 HUBOT_USER="<%= daemon_user %>"
-export HUBOT_OPTS="-a <%= adapter %>"
+
+HUBOT_OPTS="<%= hubot_opts %> -a <%= adapter %>"
+export HUBOT_OPTS

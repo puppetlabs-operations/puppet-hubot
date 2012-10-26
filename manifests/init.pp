@@ -10,6 +10,7 @@ class hubot (
   $managedeps        = true,
   $scriptdir_symlink = undef,
   $environment       = undef,
+  $hubot_opts        = '',
 ) inherits hubot::params {
   include stdlib
 
@@ -20,11 +21,12 @@ class hubot (
     git_branch  => $git_branch,
   }
   -> class { 'hubot::config':
-    adapter          => $adapter,
-    adapter_config   => $adapter_config,
-    install_dir      => $install_dir,
-    daemon_user      => $daemon_user,
-    environment      => $environment,
+    adapter        => $adapter,
+    adapter_config => $adapter_config,
+    install_dir    => $install_dir,
+    daemon_user    => $daemon_user,
+    environment    => $environment,
+    hubot_opts     => $hubot_opts,
   }
   -> class { 'hubot::scriptconfig':
     adapter           => $adapter,

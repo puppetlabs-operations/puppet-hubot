@@ -3,7 +3,8 @@ class hubot::config (
   $adapter_config,
   $daemon_user,
   $install_dir,
-  $environment   = undef
+  $environment,
+  $hubot_opts,
 ) inherits hubot::params {
 
   # I'm so sorry.
