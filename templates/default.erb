@@ -1,0 +1,10 @@
+<% if @environment -%>
+# Export misc shell environment variables
+<% environment.each do |var| -%>
+export <%= var %>
+<% end -%>
+<% end -%>
+
+HUBOT_DIR="<%= install_dir %>"
+HUBOT_USER="<%= daemon_user %>"
+export HUBOT_OPTS="-a <%= adapter %>"

@@ -1,13 +1,15 @@
 class hubot (
-  $adapter          = $hubot::params::options['adapter'],
-  $adapter_config   = {},
-  $install_dir      = $hubot::params::options['install_dir'],
-  $git_source       = $hubot::params::options['git_source'],
-  $git_branch       = $hubot::params::options['git_branch'],
-  $daemon_user      = $hubot::params::options['daemon_user'],
-  $daemon_pass      = undef,
-  $vagrant_hubot    = false,
-  $environment      = undef,
+  $adapter           = $hubot::params::options['adapter'],
+  $adapter_config    = {},
+  $install_dir       = $hubot::params::options['install_dir'],
+  $git_source        = $hubot::params::options['git_source'],
+  $git_branch        = $hubot::params::options['git_branch'],
+  $daemon_user       = $hubot::params::options['daemon_user'],
+  $daemon_pass       = undef,
+  $managescripts     = true,
+  $managedeps        = true,
+  $scriptdir_symlink = undef,
+  $environment       = undef,
 ) inherits hubot::params {
   include stdlib
 
@@ -22,10 +24,18 @@ class hubot (
     adapter_config   => $adapter_config,
     install_dir      => $install_dir,
     daemon_user      => $daemon_user,
-    daemon_pass      => $daemon_pass,
-    vagrant_hubot    => $vagrant_hubot,
     environment      => $environment,
   }
-  ~> class { 'hubot::service': }
+  -> class { 'hubot::scriptconfig':
+    install_dir       => $install_dir,
+    managescripts     => $managescripts,
+    scriptdir_symlink => $scriptdir_symlink,
+  }
+  class { 'hubot::service':
+    subscribe => [
+      Class['hubot::config'],
+      Class['hubot::scriptconfig'],
+    ],
+  }
   -> anchor { 'hubot::end': }
 }

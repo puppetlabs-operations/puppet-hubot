@@ -10,31 +10,22 @@
 # Description:       starts the Hubot bot for the Campfire rooms
 ### END INIT INFO
 
-test -f <%= install_dir %>/bin/hubot || exit 0
-
-PIDFILE=/var/run/hubot.pid
-
 . /lib/lsb/init-functions
-
-HUBOT_DIR='<%= install_dir %>'
-HUBOT_BIN='/bin/hubot'
-HUBOT_USER='<%= daemon_user %>'
-HUBOT_ADAPTER='<%= adapter %>'
-
 . /etc/default/hubot
-export HUBOT_OPTS="-a $HUBOT_ADAPTER"
 
-<% if @environment -%>
-<% environment.each do |var| -%>
-export <%= var %>
-<% end -%>
-<% end -%>
+HUBOT_BIN="${HUBOT_DIR}/bin/hubot"
+PIDFILE=/var/run/hubot.pid
+RETVAL=0
+
+test -x "${HUBOT_BIN}" || exit 5
+
 set -e
 
 start_bot ()
 {
   start-stop-daemon --start --quiet --chuid $HUBOT_USER --chdir $HUBOT_DIR --pidfile $PIDFILE --make-pidfile --background --name hubot --startas $HUBOT_DIR/$HUBOT_BIN -- $LSBNAMES $HUBOT_OPTS
-  log_end_msg $?
+  RETVAL=$?
+  log_end_msg $RETVAL
 }
 
 stop_bot ()
@@ -45,6 +36,7 @@ stop_bot ()
     rm -r $PIDFILE
   fi
   log_end_msg $STATUS
+  RETVAL=$STATUS
 }
 
 case "$1" in
@@ -77,4 +69,4 @@ status)   log_action_begin_msg "Checking Hubot"
           ;;
 esac
 
-exit 0
+exit $RETVAL
