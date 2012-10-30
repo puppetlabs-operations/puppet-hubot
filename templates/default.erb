@@ -1,6 +1,6 @@
 <% if @environment -%>
 # Export misc shell environment variables
-<% environment.each do |var| -%>
+<% @environment.each do |var| -%>
 export <%= var %>
 <% end -%>
 <% end -%>
