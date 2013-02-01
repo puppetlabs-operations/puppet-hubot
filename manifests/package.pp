@@ -10,10 +10,10 @@ class hubot::package (
   require ruby::dev
 
   # User Account for Hubot
-  user { $daemon_user:
+  user { $hubot::daemon_user:
     ensure     => present,
     comment    => 'Hubot Daemon user',
-    home       => "/home/${daemon_user}",
+    home       => "/home/${hubot::daemon_user}",
     shell      => '/bin/bash',
     managehome => true,
     password   => $daemon_pass,
