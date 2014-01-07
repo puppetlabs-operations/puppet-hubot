@@ -30,7 +30,6 @@ class hubot::package (
     require  => Class['ruby::dev'],
   }
 
-  class { 'github::known_hosts': } ->
   exec { 'download hubot via git':
     command     => "git clone ${git_source} ${install_dir} -b ${git_branch}",
     creates     => "${install_dir}/bin",
